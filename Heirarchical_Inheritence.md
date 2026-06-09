@@ -1,76 +1,100 @@
-# Multilevel Inheritance Example in Python
+# Hierarchical Inheritance in Python
 
-This Python project demonstrates the concept of **Multilevel Inheritance** to collect and display the **name**, **age**, and **location** of a person.
+This Python project demonstrates **Hierarchical Inheritance** using a base class `Details` and two derived classes `Employee` and `Patient`. The program collects and displays details for both employees and patients.
 
 ## 🎯 Aim
 
-To write a Python program that uses multilevel inheritance to get and display a person’s name, age, and location.
+To write a Python program that uses **Hierarchical Inheritance** to input and display **Employee** and **Patient** details.
+
+## 📘 Description
+
+- **Base Class:** `Details`
+  - Stores common attributes: `name`, `age`
+  - Provides methods: `getName()`, `getAge()`
+
+- **Derived Class 1:** `Employee`
+  - Inherits from `Details`
+  - Adds: `employee_id`, `department`
+  - Method: `getEmployeeDetails()`
+
+- **Derived Class 2:** `Patient`
+  - Inherits from `Details`
+  - Adds: `patient_id`, `disease`
+  - Method: `getPatientDetails()`
 
 ## 🧠 Algorithm
 
-1. **Parent Class**  
-   - `__init__(name)` initializes the `name` attribute.  
-   - `getName()` returns the `name`.
-
-2. **Child Class (inherits Parent)**  
-   - `__init__(name, age)` initializes `name` using `super()` and adds `age`.  
-   - `getAge()` returns the `age`.
-
-3. **Grandchild Class (inherits Child)**  
-   - `__init__(name, age, location)` initializes `name` and `age` using `super()` and adds `location`.  
-   - `getLocation()` returns the `location`.
-
-4. **Input & Output**  
-   - Take user input for name, age, and location.  
-   - Create an instance of `Grandchild`.  
-   - Print all details using class methods.
+1. Create base class `Details` with common attributes.
+2. Create `Employee` class extending `Details`, adding employee-specific data.
+3. Create `Patient` class extending `Details`, adding patient-specific data.
+4. Get user input for employee and patient data.
+5. Display collected information using class methods.
 
 ## Program
 ```
-class Person:
-    def __init__(self, name):
+class Details:
+    def __init__(self, name, age):
         self.name = name
+        self.age = age
 
     def getName(self):
         return self.name
-
-
-class Student(Person):
-    def __init__(self, name, age):
-        super().__init__(name)
-        self.age = age
 
     def getAge(self):
         return self.age
 
 
-class Resident(Student):
-    def __init__(self, name, age, location):
+class Employee(Details):
+    def __init__(self, name, age, employee_id, department):
         super().__init__(name, age)
-        self.location = location
+        self.employee_id = employee_id
+        self.department = department
 
-    def getLocation(self):
-        return self.location
+    def getEmployeeDetails(self):
+        print("\n--- Employee Details ---")
+        print("Name:", self.getName())
+        print("Age:", self.getAge())
+        print("Employee ID:", self.employee_id)
+        print("Department:", self.department)
 
 
-# Input from user
-name = input("Enter Name: ")
-age = int(input("Enter Age: "))
-location = input("Enter Location: ")
+class Patient(Details):
+    def __init__(self, name, age, patient_id, disease):
+        super().__init__(name, age)
+        self.patient_id = patient_id
+        self.disease = disease
 
-# Creating object of Grandchild class
-r = Resident(name, age, location)
+    def getPatientDetails(self):
+        print("\n--- Patient Details ---")
+        print("Name:", self.getName())
+        print("Age:", self.getAge())
+        print("Patient ID:", self.patient_id)
+        print("Disease:", self.disease)
 
-# Display details
-print("\n--- Person Details ---")
-print("Name:", r.getName())
-print("Age:", r.getAge())
-print("Location:", r.getLocation())
+
+# Get input for Employee
+ename = input("Enter Employee Name: ")
+eage = int(input("Enter Employee Age: "))
+eid = input("Enter Employee ID: ")
+edept = input("Enter Department: ")
+
+# Create Employee object and display details
+emp = Employee(ename, eage, eid, edept)
+emp.getEmployeeDetails()
+
+# Get input for Patient
+pname = input("\nEnter Patient Name: ")
+page = int(input("Enter Patient Age: "))
+pid = input("Enter Patient ID: ")
+pdisease = input("Enter Disease: ")
+
+# Create Patient object and display details
+pat = Patient(pname, page, pid, pdisease)
+pat.getPatientDetails()
 
 ```
-
 ## Sample Output
-<img width="453" height="279" alt="image" src="https://github.com/user-attachments/assets/695fcb79-764d-4474-b20e-1a7fa23e7533" />
+<img width="458" height="666" alt="image" src="https://github.com/user-attachments/assets/3d786b5b-4cbc-4db4-b6dd-9ee981d6d3fa" />
 
 ## Result
-Thus, it is proved that multilevel inheritance allows a derived class (Resident) to inherit properties and methods through multiple levels of inheritance
+Thus, it is proved that hierarchical inheritance allows multiple derived classes (Employee and Patient) to inherit common properties and behaviors from a single base class (Details), demonstrating effective code reusability and organization.
